@@ -148,13 +148,6 @@ fi
 
 ynh_store_file_checksum --file="$coturn_config_path"
 
-
-#=================================================
-# SET DB CONFIG
-#=================================================
-
-
-
 #=================================================
 # SETUP LOGROTATE
 #=================================================
@@ -199,9 +192,11 @@ ynh_systemd_action --service_name=$app --action=restart --log_path="/var/log/$ap
 
 echo "Coturn server was successfully installed :)
 
-username     $admin
+For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
 
-Credentials: $turnserver_pwd
+STUN or TURN URI : turn:$domain:$turnserver_tls_port
+TURN username: turnserver
+TURN password: $turnserver_pwd
 
 If you're facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/coturn_ynh" > mail_to_send
 
