@@ -16,7 +16,9 @@ STUN (Session Traversal Utilities for NAT) and TURN (Traversal Using Relays arou
 
 ## Configuration
 
-How to configure this app: From an admin panel, a plain file with SSH, or any other way.
+You need to install TURN server in a root or subdomain like `turn.domain.lts`
+
+How to configure this app: a plain file with SSH.
 
 ## Documentation
 
@@ -24,11 +26,6 @@ How to configure this app: From an admin panel, a plain file with SSH, or any ot
  * YunoHost documentation: If specific documentation is needed, feel free to contribute.
 
 ## YunoHost specific features
-
-#### Multi-user support
-
-Are LDAP and HTTP auth supported?
-Can the app be used by multiple users?
 
 #### Supported architectures
 
