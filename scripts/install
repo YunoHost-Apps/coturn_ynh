@@ -25,8 +25,7 @@ ynh_abort_if_errors
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
-admin=$YNH_APP_ARG_ADMIN
-#is_public=$YNH_APP_ARG_IS_PUBLIC
+#admin=$YNH_APP_ARG_ADMIN
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -37,8 +36,7 @@ ynh_script_progression --message="Storing installation settings..." --weight=4
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
-#ynh_app_setting_set --app=$app --key=is_public --value=$is_public
+#ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
 # CREATE A DH FILE
@@ -194,9 +192,9 @@ echo "Coturn server was successfully installed :)
 
 For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
 
-STUN or TURN URI : turn:$domain:$turnserver_tls_port
-TURN username: turnserver
-TURN password: $turnserver_pwd
+STUN or TURN URI: $domain:$turnserver_tls_port
+TURN username:    turnserver
+TURN password:    $turnserver_pwd
 
 If you're facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/coturn_ynh" > mail_to_send
 

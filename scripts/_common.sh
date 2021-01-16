@@ -84,9 +84,7 @@ ynh_send_readme_to_admin() {
 		mail_subject="$mail_subject has just been installed!"
 	fi
 
-	local mail_message="This is an automated message from your beloved YunoHost server.
-
-Specific information for the application $app.
+	local mail_message="Specific information for the application $app.
 
 $(if [ -n "$app_message" ]
 then

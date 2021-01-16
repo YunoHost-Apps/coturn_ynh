@@ -29,15 +29,6 @@
                     "fr": "Choisissez un nom de domaine pour Coturn"
                 },
                 "example": "turn.example.com"
-            },
-            {
-                "name": "admin",
-                "type": "user",
-                "ask": {
-                    "en": "Choose an admin user",
-                    "fr": "Choisissez l'administrateur"
-                },
-                "example": "johndoe"
             }
         ]
     }
