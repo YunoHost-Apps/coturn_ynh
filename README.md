@@ -20,6 +20,15 @@ You need to install TURN server in a root or subdomain like `turn.domain.lts`
 
 How to configure this app: a plain file with SSH.
 
+## Testing
+
+For testing we can use Trickle-Ice testing tool. Go to [trickle-ice page](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) and enter following details.
+```
+STUN or TURN URI : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
+TURN username: <YOUR_USERNAME>
+TURN password: <YOUR_PASSWORD>
+```
+
 ## Documentation
 
  * Official documentation: https://github.com/coturn/coturn/wiki
@@ -57,13 +66,4 @@ To try the testing branch, please proceed like that.
 sudo yunohost app install https://github.com/YunoHost-Apps/coturn_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade coturn -u https://github.com/YunoHost-Apps/coturn_ynh/tree/testing --debug
-```
-
-## Testing
-
-For testing we can use Trickle-Ice testing tool. Go to [trickle-ice page](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) and enter following details.
-```
-STUN or TURN URI : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
-TURN username: <YOUR_USERNAME>
-TURN password: <YOUR_PASSWORD>
 ```
