@@ -26,9 +26,9 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
 #admin=$YNH_APP_ARG_ADMIN
-data_path="/home/yunohost.app/$app"
 
 app=$YNH_APP_INSTANCE_NAME
+data_path="/home/yunohost.app/$app"
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
