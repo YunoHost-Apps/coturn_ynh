@@ -146,6 +146,27 @@ fi
 
 ynh_store_file_checksum --file="$coturn_config_path"
 
+
+#=================================================
+# ADD SCRIPT FOR COTURN CRON
+#=================================================
+
+# WARNING : theses command are used in INSTALL, UPGRADE
+# For any update do it in all files
+script_path=/opt/yunohost/coturn
+ynh_app_setting_set --app=$app --key=script_path --value=$script_path
+mkdir $script_path
+cp ../sources/Coturn_config_rotate.sh $script_path/Coturn_config_rotate.sh
+chmod +x $script_path/Coturn_config_rotate.sh
+
+#=================================================
+# SET COTURN CRON
+#=================================================
+
+cp ../conf/cron_coturn /etc/cron.d/$app
+ynh_replace_string --match_string="__USER__" --replace_string=turnserver --target_file=/etc/cron.d/$app
+ynh_replace_string --match_string="__SCRIPT_PATH__" --replace_string=$script_path --target_file=/etc/cron.d/$app
+
 #=================================================
 # SETUP LOGROTATE
 #=================================================

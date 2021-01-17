@@ -24,7 +24,7 @@ How to configure this app: a plain file with SSH.
 
 For testing we can use Trickle-Ice testing tool. Go to [trickle-ice page](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) and enter following details.
 ```
-STUN or TURN URI : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
+TURN URI     : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
 TURN username: <YOUR_USERNAME>
 TURN password: <YOUR_PASSWORD>
 ```
