@@ -22,7 +22,6 @@ turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
 turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$db_name
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
 # STANDARD REMOVE
@@ -76,7 +75,7 @@ ynh_remove_logrotate
 #=================================================
 
 # Remove coturn/Coturn_config_rotate.sh 
-ynh_secure_remove --file=$final_path
+ynh_secure_remove --file="/home/yunohost.app/$app"
 
 #=================================================
 # REMOVE CRON JOB
@@ -110,6 +109,7 @@ ynh_script_progression --message="Removing the dedicated system user..." --weigh
 
 # Delete a system user
 deluser turnserver ssl-cert
+ynh_system_user_delete --username=turnserver
 
 #=================================================
 # END OF SCRIPT
