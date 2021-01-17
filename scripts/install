@@ -168,7 +168,7 @@ ynh_replace_string --match_string="__DATA_PATH__" --replace_string=$data_path --
 #=================================================
 ynh_script_progression --message="Configuring log rotation..." --weight=1
 
-ynh_use_logrotate
+ynh_use_logrotate --logfile "/var/log/$app"
 
 #=================================================
 # GENERIC FINALIZATION
@@ -178,7 +178,7 @@ ynh_use_logrotate
 
 # Set permissions to app files
 chown root: -R $data_path
-chown -R root /var/log/$app
+chown -R turnserver:root /var/log/$app
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 
 #=================================================
