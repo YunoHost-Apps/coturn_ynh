@@ -25,7 +25,7 @@ new_config_line=$(egrep "^external-ip=.*\$" "/etc/turnserver.conf")
 
 if [ "$old_config_line" != "$new_config_line" ]
 then
-    systemctl restart coturn.service
+    systemctl restart $app.service
 fi
 
 exit 0

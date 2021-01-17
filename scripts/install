@@ -30,6 +30,17 @@ path_url="/"
 app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
+# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
+#=================================================
+ynh_script_progression --message="Validating installation parameters..." --weight=1
+
+final_path=/opt/yunohost/$app
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
+
+# Register (book) web path
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+
+#=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=4
@@ -153,11 +164,8 @@ ynh_store_file_checksum --file="$coturn_config_path"
 
 # WARNING : theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
-script_path=/opt/yunohost/coturn
-ynh_app_setting_set --app=$app --key=script_path --value=$script_path
-mkdir $script_path
-cp ../sources/Coturn_config_rotate.sh $script_path/Coturn_config_rotate.sh
-chmod +x $script_path/Coturn_config_rotate.sh
+cp ../sources/Coturn_config_rotate.sh $final_path/Coturn_config_rotate.sh
+chmod +x $final_path/Coturn_config_rotate.sh
 
 #=================================================
 # SET COTURN CRON
