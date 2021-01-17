@@ -54,9 +54,7 @@ ynh_remove_app_dependencies
 #=================================================
 ynh_script_progression --message="Removing Coturn main directory..." --weight=2
 
-ynh_secure_remove --file=/var/log/$app
-
-ynh_secure_remove --file=/etc/turnserver.conf
+ynh_secure_remove --file="/etc/turnserver.conf"
 mv /etc/turnserver.conf.orig /etc/turnserver.conf
 
 #=================================================
@@ -77,8 +75,11 @@ ynh_secure_remove --file="/home/yunohost.app/$app"
 #=================================================
 # REMOVE CRON JOB
 #=================================================
-
+# Remove a cron file
 ynh_secure_remove --file="/etc/cron.d/$app"
+
+# Remove the log files
+ynh_secure_remove --file="/var/log/$app/"
 
 #=================================================
 # CLOSE A PORT
