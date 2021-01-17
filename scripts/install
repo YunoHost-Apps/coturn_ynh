@@ -145,7 +145,6 @@ fi
 
 ynh_store_file_checksum --file="$coturn_config_path"
 
-
 #=================================================
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
@@ -162,7 +161,6 @@ chmod +x $data_path/Coturn_config_rotate.sh
 #=================================================
 
 cp -f ../conf/cron_coturn /etc/cron.d/$app
-ynh_replace_string --match_string="__USER__" --replace_string=turnserver --target_file=/etc/cron.d/$app
 ynh_replace_string --match_string="__DATA_PATH__" --replace_string=$data_path --target_file=/etc/cron.d/$app
 
 #=================================================
@@ -179,7 +177,7 @@ ynh_use_logrotate
 #=================================================
 
 # Set permissions to app files
-chown turnserver: -R $data_path
+chown root: -R $data_path
 chown -R root /var/log/$app
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 

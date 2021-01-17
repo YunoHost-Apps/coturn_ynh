@@ -1,3 +1,2 @@
 # Check if the IP as not changed at every 15th minute
-# */15 * * * * root bash /__SCRIPT_PATH__/Coturn_config_rotate.sh;
-*/15 * * * * __USER__ bash /__DATA_PATH__/Coturn_config_rotate.sh;
+*/15 * * * * root bash /__DATA_PATH__/Coturn_config_rotate.sh;

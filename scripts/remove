@@ -52,7 +52,7 @@ ynh_remove_app_dependencies
 #=================================================
 # REMOVE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Removing Coturn main directory..." --weight=2
+ynh_script_progression --message="Removing Coturn configuration file..." --weight=2
 
 ynh_secure_remove --file="/etc/turnserver.conf"
 mv /etc/turnserver.conf.orig /etc/turnserver.conf
