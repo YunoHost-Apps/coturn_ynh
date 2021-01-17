@@ -26,6 +26,7 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
 #admin=$YNH_APP_ARG_ADMIN
+data_path="/home/yunohost.app/$app"
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -47,6 +48,7 @@ ynh_script_progression --message="Storing installation settings..." --weight=4
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=no_sso --value true
 #ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
@@ -164,14 +166,15 @@ ynh_store_file_checksum --file="$coturn_config_path"
 
 # WARNING : theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
-cp ../sources/Coturn_config_rotate.sh $final_path/
+mkdir -p $data_path
+cp -f ../sources/Coturn_config_rotate.sh $data_path/
 chmod +x $final_path/Coturn_config_rotate.sh
 
 #=================================================
 # SET COTURN CRON
 #=================================================
 
-cp ../conf/cron_coturn /etc/cron.d/$app
+cp -f ../conf/cron_coturn /etc/cron.d/$app
 ynh_replace_string --match_string="__USER__" --replace_string=turnserver --target_file=/etc/cron.d/$app
 ynh_replace_string --match_string="__SCRIPT_PATH__" --replace_string=$script_path --target_file=/etc/cron.d/$app
 
@@ -189,6 +192,7 @@ ynh_use_logrotate
 #=================================================
 
 # Set permissions to app files
+chown turnserver: -R $data_path
 #chown -R root /var/log/$app
 #hown -R root /etc/$app
 #chmod -R u=rwX,g=rX,o= /etc/$app
