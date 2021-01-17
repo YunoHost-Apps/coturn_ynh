@@ -25,10 +25,8 @@ ynh_abort_if_errors
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
-#admin=$YNH_APP_ARG_ADMIN
 
 app=$YNH_APP_INSTANCE_NAME
-data_path="/home/yunohost.app/$app"
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
@@ -49,7 +47,6 @@ ynh_script_progression --message="Storing installation settings..." --weight=4
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=no_sso --value true
-#ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
 # CREATE A DH FILE
@@ -166,6 +163,7 @@ ynh_store_file_checksum --file="$coturn_config_path"
 
 # WARNING : theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
+data_path="/home/yunohost.app/$app"
 mkdir -p $data_path
 cp -f ../sources/Coturn_config_rotate.sh $data_path/
 chmod +x $data_path/Coturn_config_rotate.sh

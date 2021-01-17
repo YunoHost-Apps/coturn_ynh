@@ -20,8 +20,6 @@ domain=$(ynh_app_setting_get --app=$app --key=domain)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
 turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
-db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-db_user=$db_name
 
 #=================================================
 # STANDARD REMOVE
@@ -108,7 +106,6 @@ closeport() {
 ynh_script_progression --message="Removing the dedicated system user..." --weight=1
 
 # Delete a system user
-deluser turnserver ssl-cert
 ynh_system_user_delete --username=turnserver
 
 #=================================================
