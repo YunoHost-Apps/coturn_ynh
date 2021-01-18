@@ -17,11 +17,8 @@ ynh_script_progression --message="Loading installation settings..." --weight=1
 app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
 turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
-db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-db_user=$db_name
 
 #=================================================
 # STANDARD REMOVE
@@ -42,7 +39,6 @@ fi
 ynh_script_progression --message="Stopping and removing the systemd service..." --weight=1
 
 # Remove the dedicated systemd config
-#ynh_remove_systemd_config
 ynh_remove_systemd_config
 
 #=================================================
@@ -56,11 +52,9 @@ ynh_remove_app_dependencies
 #=================================================
 # REMOVE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Removing Coturn main directory..." --weight=2
+ynh_script_progression --message="Removing Coturn configuration file..." --weight=2
 
-ynh_secure_remove --file=/var/log/$app
-
-ynh_secure_remove --file=/etc/turnserver.conf
+ynh_secure_remove --file="/etc/turnserver.conf"
 mv /etc/turnserver.conf.orig /etc/turnserver.conf
 
 #=================================================
@@ -70,6 +64,25 @@ ynh_script_progression --message="Removing logrotate configuration..." --weight=
 
 # Remove the app-specific logrotate config
 ynh_remove_logrotate
+
+#=================================================
+# REMOVE SCRIPT
+#=================================================
+
+# Remove coturn/Coturn_config_rotate.sh 
+ynh_secure_remove --file="/home/yunohost.app/$app"
+
+#=================================================
+# REMOVE CRON JOB
+#=================================================
+# Remove a cron file
+ynh_secure_remove --file="/etc/cron.d/$app"
+
+# Remove the log files
+ynh_secure_remove --file="/var/log/$app/"
+
+# Remove the sqlitedb file
+ynh_secure_remove --file="/var/lib/turn/"
 
 #=================================================
 # CLOSE A PORT
@@ -96,7 +109,7 @@ closeport() {
 ynh_script_progression --message="Removing the dedicated system user..." --weight=1
 
 # Delete a system user
-deluser turnserver ssl-cert
+ynh_system_user_delete --username=turnserver
 
 #=================================================
 # END OF SCRIPT

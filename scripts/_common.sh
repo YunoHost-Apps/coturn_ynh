@@ -15,7 +15,6 @@ pkg_dependencies="sqlite3 libsqlite3-dev coturn acl"
 # EXPERIMENTAL HELPERS
 #=================================================
 
-
 # Send an email to inform the administrator
 #
 # usage: ynh_send_readme_to_admin --app_message=app_message [--recipients=recipients] [--type=type]
@@ -152,4 +151,3 @@ __PRE_TAG1__$(yunohost tools diagnosis | grep -B 100 "services:" | sed '/service
 	# Send the email to the recipients
 	cat mail_to_send | $mail_bin -a "Content-Type: $content_type; charset=UTF-8" -s "$mail_subject" "$recipients"
 }
-
