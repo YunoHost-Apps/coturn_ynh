@@ -133,14 +133,19 @@ ynh_print_ON
 public_ip4="$(curl ip.yunohost.org)" || true
 public_ip6="$(curl ipv6.yunohost.org)" || true
 
-if [ -n "$public_ip4" ] && ynh_validate_ip4 --ip_address="$public_ip4"
-then
-    echo "external-ip=$public_ip4" >> "$coturn_config_path"
-fi
+# if [ -n "$public_ip4" ] && ynh_validate_ip4 --ip_address="$public_ip4"
+# then
+#     echo "external-ip=$public_ip4" >> "$coturn_config_path"
+# fi
 
-if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
+# if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
+# then
+#     echo "external-ip=$public_ip6" >> "$coturn_config_path"
+# fi
+
+if ( [[ -n "$public_ip4" ]] && ynh_validate_ip4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
 then
-    echo "external-ip=$public_ip6" >> "$coturn_config_path"
+    echo "external-ip=${public_ip4},${public_ip6}" >> "$coturn_config_path"
 fi
 
 ynh_store_file_checksum --file="$coturn_config_path"
