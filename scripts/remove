@@ -77,13 +77,13 @@ ynh_secure_remove --file="/home/yunohost.app/$app"
 #=================================================
 
 # Remove a cron file
-ynh_secure_remove --file="/etc/cron.d/$app"
+ynh_secure_remove --file=/etc/cron.d/$app
 
 # Remove the log files
-ynh_secure_remove --file="/var/log/$app/"
+ynh_secure_remove --file=/var/log/$app
 
 # Remove the sqlitedb file
-ynh_secure_remove --file="/var/lib/turn/"
+ynh_secure_remove --file=/var/lib/turn
 
 #=================================================
 # CLOSE PORTS
@@ -109,7 +109,6 @@ fi
 ynh_script_progression --message="Removing the dedicated system user..." --weight=1
 
 # Delete a system user
-userdel turnserver ssl-cert
 ynh_system_user_delete --username=turnserver
 
 #=================================================
