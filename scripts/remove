@@ -83,7 +83,7 @@ ynh_secure_remove --file=/etc/cron.d/$app
 ynh_secure_remove --file=/var/log/$app
 
 # Remove the sqlitedb file
-ynh_secure_remove --file=/var/lib/turn
+#ynh_secure_remove --file=/var/lib/turn
 
 #=================================================
 # CLOSE PORTS
