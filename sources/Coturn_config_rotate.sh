@@ -16,7 +16,7 @@ else
     external_IP_line="${external_IP_line/'__IPV4__,'/}"
 fi
 
-if [[ -n "$public_ip6" ]] && ynh_validate_ip 6 "$public_ip6"
+if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
 then
     external_IP_line="${external_IP_line/'__IPV6__'/$public_ip6}"
 else
