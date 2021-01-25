@@ -2,6 +2,8 @@
 
 source /usr/share/yunohost/helpers
 
+coturn_config_path="/etc/turnserver.conf"
+
 external_IP_line="external-ip=__IPV4__,__IPV6__"
 
 public_ip4="$(curl ip.yunohost.org)" || true
@@ -25,7 +27,7 @@ new_config_line=$(egrep "^external-ip=.*\$" "/etc/turnserver.conf")
 
 if [ "$old_config_line" != "$new_config_line" ]
 then
-    systemctl restart $app.service
+    systemctl restart __APP__.service
 fi
 
 exit 0
