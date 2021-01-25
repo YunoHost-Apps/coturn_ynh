@@ -3,8 +3,8 @@
     "id": "coturn",
     "packaging_format": 1,
     "description": {
-        "en": "Videoconferencing server that is easy to deploy",
-        "fr": "Serveur de visioconférence facile à déployer"
+        "en": "VoIP media traffic NAT traversal server and gateway",
+        "fr": "Serveur et passerelle NAT du trafic média VoIP"
     },
     "version": "4.5.1.1~ynh1",
     "url": "https://github.com/coturn/coturn",
