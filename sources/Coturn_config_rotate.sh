@@ -4,7 +4,7 @@ source /usr/share/yunohost/helpers
 
 coturn_config_path="/etc/turnserver.conf"
 
-external_IP_line="external-ip=__IPV4__,__IPV6__"
+external_IP_line="external-ip=__IPV4__/__IPV6__"
 
 public_ip4="$(curl ip.yunohost.org)" || true
 public_ip6="$(curl ipv6.yunohost.org)" || true
