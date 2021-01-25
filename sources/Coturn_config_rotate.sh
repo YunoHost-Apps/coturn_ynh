@@ -9,14 +9,18 @@ external_IP_line="external-ip=__IPV4__,__IPV6__"
 public_ip4="$(curl ip.yunohost.org)" || true
 public_ip6="$(curl ipv6.yunohost.org)" || true
 
-if [ -n "$public_ip4" ] && ynh_validate_ip4 --ip_address="$public_ip4"
+if [[ -n "$public_ip4" ]] && ynh_validate_ip 4 "$public_ip4"
 then
-    echo "external-ip=$public_ip4" >> "$coturn_config_path"
+    external_IP_line="${external_IP_line/'__IPV4__'/$public_ip4}"
+else
+    external_IP_line="${external_IP_line/'__IPV4__,'/}"
 fi
 
-if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
+if [[ -n "$public_ip6" ]] && ynh_validate_ip 6 "$public_ip6"
 then
-    echo "external-ip=$public_ip6" >> "$coturn_config_path"
+    external_IP_line="${external_IP_line/'__IPV6__'/$public_ip6}"
+else
+    external_IP_line="${external_IP_line/',__IPV6__'/}"
 fi
 
 old_config_line=$(egrep "^external-ip=.*\$" "/etc/turnserver.conf")
