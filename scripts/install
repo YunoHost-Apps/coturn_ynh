@@ -185,7 +185,6 @@ ynh_use_logrotate --logfile "/var/log/$app"
 # Set permissions to app files
 chown root: -R $data_path
 chown -R turnserver:root /var/log/$app
-chmod 770 $coturn_config_path
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 
 #=================================================
