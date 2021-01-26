@@ -133,14 +133,19 @@ ynh_print_ON
 public_ip4="$(curl ip.yunohost.org)" || true
 public_ip6="$(curl ipv6.yunohost.org)" || true
 
-if [ -n "$public_ip4" ] && ynh_validate_ip4 --ip_address="$public_ip4"
-then
-    echo "external-ip=$public_ip4" >> "$coturn_config_path"
-fi
+# if [ -n "$public_ip4" ] && ynh_validate_ip4 --ip_address="$public_ip4"
+# then
+#     echo "external-ip=$public_ip4" >> "$coturn_config_path"
+# fi
 
-if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
+# if [ -n "$public_ip6" ] && ynh_validate_ip6 --ip_address="$public_ip6"
+# then
+#     echo "external-ip=$public_ip6" >> "$coturn_config_path"
+# fi
+
+if ( [[ -n "$public_ip4" ]] && ynh_validate_ip4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
 then
-    echo "external-ip=$public_ip6" >> "$coturn_config_path"
+    echo "external-ip=${public_ip4}/${public_ip6}" >> "$coturn_config_path"
 fi
 
 ynh_store_file_checksum --file="$coturn_config_path"
@@ -154,6 +159,7 @@ ynh_store_file_checksum --file="$coturn_config_path"
 data_path="/home/yunohost.app/$app"
 mkdir -p $data_path
 cp -f ../sources/Coturn_config_rotate.sh $data_path/
+ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_path/Coturn_config_rotate.sh
 chmod +x $data_path/Coturn_config_rotate.sh
 
 #=================================================
@@ -179,6 +185,7 @@ ynh_use_logrotate --logfile "/var/log/$app"
 # Set permissions to app files
 chown root: -R $data_path
 chown -R turnserver:root /var/log/$app
+chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 
 #=================================================

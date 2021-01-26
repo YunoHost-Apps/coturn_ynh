@@ -75,31 +75,31 @@ ynh_secure_remove --file="/home/yunohost.app/$app"
 #=================================================
 # REMOVE CRON JOB
 #=================================================
+
 # Remove a cron file
-ynh_secure_remove --file="/etc/cron.d/$app"
+ynh_secure_remove --file=/etc/cron.d/$app
 
 # Remove the log files
-ynh_secure_remove --file="/var/log/$app/"
+ynh_secure_remove --file=/var/log/$app
 
 # Remove the sqlitedb file
-ynh_secure_remove --file="/var/lib/turn/"
+#ynh_secure_remove --file=/var/lib/turn
 
 #=================================================
-# CLOSE A PORT
+# CLOSE PORTS
 #=================================================
 
-closeport() {
-    local port=$1
-    if yunohost firewall list | grep -q "\- $turnserver_tls_port$"
-    then
-            ynh_script_progression --message="Closing port $turnserver_tls_port port"
-            ynh_exec_warn_less yunohost firewall disallow Both $turnserver_tls_port  
-    elif yunohost firewall list | grep -q "\- $turnserver_alt_tls_port$"
-    then
-    	ynh_script_progression --message="Closing port $turnserver_alt_tls_port port"
-    	ynh_exec_warn_less yunohost firewall disallow Both $turnserver_alt_tls_port
-    fi
-}
+if yunohost firewall list | grep -q "\- $turnserver_tls_port$"
+then
+    ynh_script_progression --message="Closing port $turnserver_tls_port..." --weight=1
+    ynh_exec_warn_less yunohost firewall disallow Both $turnserver_tls_port 
+fi
+
+if yunohost firewall list | grep -q "\- $turnserver_alt_tls_port$"
+then
+    ynh_script_progression --message="Closing port $turnserver_alt_tls_port..." --weight=1
+    ynh_exec_warn_less yunohost firewall disallow Both $turnserver_alt_tls_port
+fi
 
 #=================================================
 # GENERIC FINALIZATION
@@ -109,6 +109,7 @@ closeport() {
 ynh_script_progression --message="Removing the dedicated system user..." --weight=1
 
 # Delete a system user
+deluser turnserver ssl-cert
 ynh_system_user_delete --username=turnserver
 
 #=================================================
