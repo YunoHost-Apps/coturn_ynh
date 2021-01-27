@@ -8,7 +8,7 @@
     },
     "version": "4.5.1.1~ynh1",
     "url": "https://github.com/coturn/coturn",
-    "license": "",
+    "license": "BSD-3-Clause",
     "maintainer": {
         "name": "",
         "email": ""
