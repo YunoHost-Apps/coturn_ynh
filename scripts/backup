@@ -34,12 +34,6 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 ynh_print_info --message="Declaring files to be backed up..."
 
 #=================================================
-# BACKUP THE APP MAIN DIR
-#=================================================
-
-ynh_backup --src_path="$final_path"
-
-#=================================================
 # BACKUP THE COTURN CONFIGURATION
 #=================================================
 
