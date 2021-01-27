@@ -58,6 +58,7 @@ ynh_backup --src_path="/home/yunohost.app/$app"
 #=================================================
 
 ynh_backup --src_path="/var/log/$app"
+ynh_backup --src_path="/etc/cron.d/$app"
 
 #=================================================
 # BACKUP SYSTEMD
