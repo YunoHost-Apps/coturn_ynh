@@ -12,7 +12,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --time --weight=1
+ynh_script_progression --message="Loading installation settings..." --weight=1
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -82,7 +82,7 @@ ynh_add_systemd_config
 #=================================================
 # SET COTURN CONFIG
 #=================================================
-ynh_script_progression --message="Configuring Coturn..." --weight=1
+ynh_script_progression --message="Configuring Coturn..." --weight=2
 
 # WARNING: theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
@@ -138,17 +138,17 @@ ynh_replace_string --match_string="__DATA_PATH__" --replace_string=$data_path --
 #=================================================
 
 # Fix issue about certificates access
-if [ ! $(grep "ssl-cert:x:[0-9]*:.*$app" /etc/group) ]
-then
-    ynh_script_progression --message="Use standard access for certificate..." --weight=1
+# if [ ! $(grep "ssl-cert:x:[0-9]*:.*$app" /etc/group) ]
+# then
+#     ynh_script_progression --message="Use standard access for certificate..." --weight=1
 
-    adduser turnserver ssl-cert
-fi
+#     adduser turnserver ssl-cert
+# fi
 
 #=================================================
 # SETUP LOGROTATE
 #=================================================
-ynh_script_progression --message="Configuring log rotation..." --weight=1
+ynh_script_progression --message="Configuring log rotation..." --weight=5
 
 ynh_use_logrotate --logfile "/var/log/$app"
 
