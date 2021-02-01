@@ -77,7 +77,7 @@ fi
 
 # Restore permissions on app files
 # Set permissions to app files
-chown root: -R $data_path
+chown root: -R "/home/yunohost.app/$app"
 chown -R turnserver:root /var/log/$app
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
