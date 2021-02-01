@@ -59,15 +59,20 @@ fi
 ynh_script_progression --message="Finding an available port..." --weight=3
 
 # Find an available port
+turnserver_standard_port=$(ynh_find_port --port=3478)
 turnserver_tls_port=$(ynh_find_port --port=5349)
 turnserver_alt_tls_port=$(ynh_find_port --port=$((turnserver_tls_port+1)))
 cli_port=$(ynh_find_port --port=5766)
 
+# TODO also reserve UDP Port range 49152:65535
+
 # Open the port
+ynh_exec_warn_less yunohost firewall allow Both $turnserver_standard_port
 ynh_exec_warn_less yunohost firewall allow Both $turnserver_tls_port
 ynh_exec_warn_less yunohost firewall allow Both $turnserver_alt_tls_port
 
 # Store opened ports
+ynh_app_setting_set --app=$app --key=turnserver_standard_port --value=$turnserver_standard_port
 ynh_app_setting_set --app=$app --key=turnserver_tls_port --value=$turnserver_tls_port
 ynh_app_setting_set --app=$app --key=turnserver_alt_tls_port --value=$turnserver_alt_tls_port
 ynh_app_setting_set --app=$app --key=cli_port --value=$cli_port
@@ -163,6 +168,27 @@ ynh_replace_string --match_string="__DATA_PATH__" --replace_string=$data_path --
 ynh_script_progression --message="Configuring log rotation..." --weight=1
 
 ynh_use_logrotate --logfile "/var/log/$app"
+
+#=================================================
+# ADD METRONOME CONFIGURATION
+#=================================================
+
+#ynh_add_config --template="metronome.cfg.lua" --destination="$metronome_snippet_path"
+cp ../conf/metronome.cfg.lua "$metronome_snippet_path"
+ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__APP__ --replace_string=$app
+ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__DOMAIN__ --replace_string=$domain
+ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__STANDARD_PORT__ --replace_string=$turnserver_standard_port
+ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__TLS_PORT__ --replace_string=$turnserver_tls_port
+ynh_print_OFF
+ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__TURNPWD__ --replace_string=$turnserver_pwd
+ynh_print_ON
+
+# TODO make sure the two following modules are enabled in metronome's main config
+#  "extdisco";
+#  "jingle_nodes";
+
+
+ynh_systemd_action --action="reload" --service_name="metronome"
 
 #=================================================
 # GENERIC FINALIZATION

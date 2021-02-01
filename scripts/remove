@@ -17,6 +17,7 @@ ynh_script_progression --message="Loading installation settings..." --weight=1
 app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
+turnserver_standard_port=$(ynh_app_setting_get --app=$app --key=turnserver_standard_port)
 turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
 turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
 
@@ -66,6 +67,13 @@ ynh_script_progression --message="Removing logrotate configuration..." --weight=
 ynh_remove_logrotate
 
 #=================================================
+# REMOVE METRONOME CONFIGURATION
+#=================================================
+
+ynh_secure_remove --file="$metronome_snippet_path"
+ynh_systemd_action --action="reload" --service_name="metronome"
+
+#=================================================
 # REMOVE SCRIPT
 #=================================================
 
@@ -89,6 +97,12 @@ ynh_secure_remove --file=/var/log/$app
 # CLOSE PORTS
 #=================================================
 
+if yunohost firewall list | grep -q "\- $turnserver_standard_port$"
+then
+    ynh_script_progression --message="Closing port $turnserver_standard_port..." --weight=1
+    ynh_exec_warn_less yunohost firewall disallow Both $turnserver_standard_port
+fi
+
 if yunohost firewall list | grep -q "\- $turnserver_tls_port$"
 then
     ynh_script_progression --message="Closing port $turnserver_tls_port..." --weight=1
@@ -100,6 +114,8 @@ then
     ynh_script_progression --message="Closing port $turnserver_alt_tls_port..." --weight=1
     ynh_exec_warn_less yunohost firewall disallow Both $turnserver_alt_tls_port
 fi
+
+# TODO also release UDP port range 49152:65535
 
 #=================================================
 # GENERIC FINALIZATION

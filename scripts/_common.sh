@@ -7,6 +7,8 @@
 # dependencies used by the app
 pkg_dependencies="sqlite3 libsqlite3-dev coturn acl"
 
+metronome_snippet_path="/etc/metronome/conf.d/coturn.cfg.lua"
+
 #=================================================
 # PERSONAL HELPERS
 #=================================================
