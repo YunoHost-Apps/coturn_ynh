@@ -42,7 +42,7 @@ ynh_script_progression --message="Restoring Coturn configuration..." --weight=1
 ynh_restore_file --origin_path="/etc/turnserver.conf"
 
 #=================================================
-# BACKUP THE COTURN DATAPATH
+# RESTORE THE COTURN DATAPATH
 #=================================================
 ynh_script_progression --message="Restoring Coturn Datapath..." --weight=1
 
@@ -64,7 +64,7 @@ ynh_system_user_create --username=turnserver
 adduser turnserver ssl-cert
 
 #=================================================
-# CREATE A DH FILE
+# RECREATE A DH FILE
 #=================================================
 ynh_script_progression --message="Creating a dhparam file..." --weight=3
 
