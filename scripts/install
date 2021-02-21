@@ -184,10 +184,9 @@ ynh_print_OFF
 ynh_replace_string --target_file="$metronome_snippet_path" --match_string=__TURNPWD__ --replace_string=$turnserver_pwd
 ynh_print_ON
 
-# TODO make sure the two following modules are enabled in metronome's main config
-#  "extdisco";
-#  "jingle_nodes";
-
+# Make sure the two following modules are enabled in metronome's main config
+ynh_metronome_ensure_module_is_enabled extdisco
+ynh_metronome_ensure_module_is_enabled jingle_nodes
 
 ynh_systemd_action --action="reload" --service_name="metronome"
 

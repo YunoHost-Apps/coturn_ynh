@@ -71,6 +71,10 @@ ynh_remove_logrotate
 #=================================================
 
 ynh_secure_remove --file="$metronome_snippet_path"
+
+# Disable modules
+sed -i '/ -- XXX module added by coturn_ynh/d' /etc/metronome/metronome.cfg.lua
+
 ynh_systemd_action --action="reload" --service_name="metronome"
 
 #=================================================

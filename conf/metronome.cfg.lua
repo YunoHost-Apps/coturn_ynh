@@ -1,9 +1,3 @@
--- XXX modules that need to be enabled in main config file.
---modules_enabled = {
---	"extdisco";
---	"jingle_nodes";
---};
-
 external_services = {
     ["__DOMAIN__"] = {
         [1] = {

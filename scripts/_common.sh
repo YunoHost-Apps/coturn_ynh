@@ -13,6 +13,25 @@ metronome_snippet_path="/etc/metronome/conf.d/coturn.cfg.lua"
 # PERSONAL HELPERS
 #=================================================
 
+ynh_metronome_ensure_module_is_enabled() {
+	module=${1:-admin_telnet}
+	if ! _metronome_modules_list | grep -qE "^${module}$" ; then
+		_metronome_module_add ${module}
+	fi
+}
+
+_metronome_modules_list() {
+	grep -Ev '^\s*--' /etc/metronome/metronome.cfg.lua \
+	 | sed -n '/^modules_enabled = {$/,/^\s*};$/p' \
+	 | grep '\s*"' | sed -r 's/^\s*"([^"]+)";.*/\1/'
+}
+
+_metronome_module_add() {
+	module=${1:-admin_telnet}
+	echo "Inserting module ${module}"
+	sed -i '/^modules_enabled = {/a \	\	"'${module}'"; -- XXX module added by coturn_ynh' /etc/metronome/metronome.cfg.lua
+}
+
 #=================================================
 # EXPERIMENTAL HELPERS
 #=================================================
