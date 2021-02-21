@@ -115,7 +115,8 @@ then
     ynh_exec_warn_less yunohost firewall disallow Both $turnserver_alt_tls_port
 fi
 
-# TODO also release UDP port range 49152:65535
+# Release UDP port range 49152:65535
+ynh_exec_warn_less yunohost firewall disallow UDP -4 49152:65535 # XXX hard-coded values
 
 #=================================================
 # GENERIC FINALIZATION

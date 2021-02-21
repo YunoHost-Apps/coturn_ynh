@@ -64,7 +64,8 @@ turnserver_tls_port=$(ynh_find_port --port=5349)
 turnserver_alt_tls_port=$(ynh_find_port --port=$((turnserver_tls_port+1)))
 cli_port=$(ynh_find_port --port=5766)
 
-# TODO also reserve UDP Port range 49152:65535
+# Reserve UDP Port range 49152:65535
+ynh_exec_warn_less yunohost firewall allow UDP -4 49152:65535 # XXX hard-coded values
 
 # Open the port
 ynh_exec_warn_less yunohost firewall allow Both $turnserver_standard_port
