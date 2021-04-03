@@ -37,8 +37,8 @@ TURN password: <YOUR_PASSWORD>
 
 #### Architectures supportées
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/coturn%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/coturn%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/coturn/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/coturn.svg)](https://ci-apps-arm.yunohost.org/ci/apps/coturn/)
 
 ## Limitations
 
