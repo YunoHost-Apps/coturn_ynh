@@ -115,7 +115,7 @@ ynh_print_ON
 
 coturn_config_path="/etc/turnserver.conf"
 
-ynh_add_config --template="/etc/turnserver.conf" --destination="$coturn_config_path"
+ynh_add_config --template="../conf/turnserver.conf" --destination="$coturn_config_path"
 
 # Get public IP and set as external IP for coturn
 # note: '|| true' is used to ignore the errors if we can't get the public ipv4 or ipv6
