@@ -89,18 +89,7 @@ ynh_script_progression --message="Configuring Coturn..." --weight=2
 
 coturn_config_path="/etc/turnserver.conf"
 
-ynh_backup_if_checksum_is_different --file="$coturn_config_path"
-
-cp ../conf/turnserver.conf "$coturn_config_path"
-
-ynh_replace_string --match_string=__APP__ --replace_string=$app --target_file="$coturn_config_path"
-ynh_replace_string --match_string=__DOMAIN__ --replace_string=$domain --target_file="$coturn_config_path"
-ynh_replace_string --match_string=__TLS_PORT__ --replace_string=$turnserver_tls_port --target_file="$coturn_config_path"
-ynh_replace_string --match_string=__TLS_ALT_PORT__ --replace_string=$turnserver_alt_tls_port --target_file="$coturn_config_path"
-ynh_replace_string --match_string=__CLI_PORT__ --replace_string=$cli_port --target_file="$coturn_config_path"
-ynh_print_OFF
-ynh_replace_string --match_string=__TURNPWD__ --replace_string=$turnserver_pwd --target_file="$coturn_config_path"
-ynh_print_ON
+ynh_add_config --template="../conf/turnserver.conf" --destination="$coturn_config_path"
 
 # Get public IP and set as external IP for coturn
 # note: '|| true' is used to ignore the errors if we can't get the public ipv4 or ipv6
@@ -130,8 +119,7 @@ chmod +x $data_path/Coturn_config_rotate.sh
 # SET COTURN CRON
 #=================================================
 
-cp -f ../conf/cron_coturn /etc/cron.d/$app
-ynh_replace_string --match_string="__DATA_PATH__" --replace_string=$data_path --target_file=/etc/cron.d/$app
+ynh_add_config --template="../conf/cron_coturn" --destination="/etc/cron.d/$app"
 
 #=================================================
 # MIGRATION 3 : USE STANDARD ACCESS FOR CERTIFCATE
@@ -169,7 +157,7 @@ setfacl -R -m user:turnserver:rwX  /var/log/$app
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=2
 
-yunohost service add $app --description="Coturn TURN server" --log="/var/log/$app/$app.log" --needs_exposed_ports $turnserver_tls_port
+yunohost service add $app --description="Coturn TURN server" --log="/var/log/$app/$app.log" --needs_exposed_ports="$turnserver_tls_port"
 
 #=================================================
 # START SYSTEMD SERVICE
