@@ -6,7 +6,7 @@
 *[Read this readme in english.](./README.md)* 
 
 > *Ce package vous permet d'installer Coturn rapidement et simplement sur un serveur YunoHost.  
-Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install) pour apprendre comment l'installer.*
+Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/install) pour apprendre comment l'installer.*
 
 ## Overview
 Serveur TURN et STUN pour VoIP. STUN (Session Traversal Utilities for NAT) et TURN (Traversal Using Relays around NAT) sont des protocoles qui peuvent être utilisés pour fournir une traversée NAT pour VoIP et WebRTC. Ce package fournit un serveur et une passerelle de traversée NAT du trafic multimédia VoIP. 
@@ -37,8 +37,8 @@ TURN password: <YOUR_PASSWORD>
 
 #### Architectures supportées
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/coturn%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/coturn%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/coturn/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/coturn.svg)](https://ci-apps-arm.yunohost.org/ci/apps/coturn/)
 
 ## Limitations
 
