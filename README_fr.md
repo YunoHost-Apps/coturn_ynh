@@ -1,17 +1,23 @@
-# Coturn server pour YunoHost
+# Coturn pour YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)  
+[![Niveau d'intégration](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)  
 [![Installer Coturn avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
-*[Read this readme in english.](./README.md)* 
+*[Read this readme in english.](./README.md)*
+*[Lire ce readme en français.](./README_fr.md)*
 
-> *Ce package vous permet d'installer Coturn rapidement et simplement sur un serveur YunoHost.  
-Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/install) pour apprendre comment l'installer.*
+> *Ce package vous permet d'installer Coturn rapidement et simplement sur un serveur YunoHost.
+Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
 
-## Overview
-Serveur TURN et STUN pour VoIP. STUN (Session Traversal Utilities for NAT) et TURN (Traversal Using Relays around NAT) sont des protocoles qui peuvent être utilisés pour fournir une traversée NAT pour VoIP et WebRTC. Ce package fournit un serveur et une passerelle de traversée NAT du trafic multimédia VoIP. 
+## Vue d'ensemble
 
-**Version incluse :** 4.5.1.1
+Serveur et passerelle NAT du trafic média VoIP
+
+**Version incluse :** 4.5.1.1~ynh3
+
+
+
+## Avertissements / informations importantes
 
 ## Configuration
 
@@ -28,33 +34,12 @@ TURN username: <YOUR_USERNAME>
 TURN password: <YOUR_PASSWORD>
 ```
 
-## Documentation
+## Documentations et ressources
 
- * Documentation officielle : https://github.com/coturn/coturn/wiki
- * Documentation YunoHost : Si une documentation spécifique est nécessaire, n'hésitez pas à contribuer.
-
-#### Support multi-utilisateur
-
-#### Architectures supportées
-
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/coturn.svg)](https://ci-apps-arm.yunohost.org/ci/apps/coturn/)
-
-## Limitations
-
-* Limitations connues.
-
-## Informations additionnelles
-
-* Autres informations que vous souhaitez ajouter sur cette application.
-
-## Links
-
- * Signaler un bug : https://github.com/YunoHost-Apps/coturn_ynh/issues
- * Site de l'application : https://github.com/coturn/coturn
- * Site web YunoHost : https://yunohost.org/
-
----
+* Documentation officielle de l'admin : https://github.com/coturn/coturn/wiki
+* Dépôt de code officiel de l'app : https://github.com/coturn/coturn
+* Documentation YunoHost pour cette app : https://yunohost.org/app_coturn
+* Signaler un bug : https://github.com/YunoHost-Apps/coturn_ynh/issues
 
 ## Informations pour les développeurs
 
@@ -66,3 +51,5 @@ sudo yunohost app install https://github.com/YunoHost-Apps/coturn_ynh/tree/testi
 ou
 sudo yunohost app upgrade coturn -u https://github.com/YunoHost-Apps/coturn_ynh/tree/testing --debug
 ```
+
+**Plus d'infos sur le packaging d'applications :** https://yunohost.org/packaging_apps
