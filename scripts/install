@@ -192,7 +192,7 @@ echo "Coturn server was successfully installed :)
 
 For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
 
-STUN or TURN URI: $domain:$turnserver_tls_port
+STUN or TURN URI: turn:$domain:$turnserver_tls_port
 TURN username:    turnserver
 TURN password:    $turnserver_pwd
 
