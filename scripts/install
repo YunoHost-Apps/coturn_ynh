@@ -105,10 +105,8 @@ ynh_script_progression --message="Configuring Coturn..." --weight=1
 # For any update do it in all files
 
 # Find password for turnserver
-ynh_print_OFF
 turnserver_pwd=$(ynh_string_random --length=30)
 ynh_app_setting_set --app=$app --key=turnserver_pwd --value=$turnserver_pwd
-ynh_print_ON
 
 coturn_config_path="/etc/turnserver.conf"
 
