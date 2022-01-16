@@ -1,6 +1,6 @@
 ## Configuration
 
-You need to install TURN server in a root or subdomain like `turn.domain.lts`
+You need to install TURN server in a root or subdomain like `turn.domain.tld`
 
 How to configure this app: a plain file with SSH.
 
