@@ -13,9 +13,6 @@ source /usr/share/yunohost/helpers
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-ynh_clean_setup () {
-	ynh_clean_check_starting
-}
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
 
@@ -108,10 +105,8 @@ ynh_script_progression --message="Configuring Coturn..." --weight=1
 # For any update do it in all files
 
 # Find password for turnserver
-ynh_print_OFF
 turnserver_pwd=$(ynh_string_random --length=30)
 ynh_app_setting_set --app=$app --key=turnserver_pwd --value=$turnserver_pwd
-ynh_print_ON
 
 coturn_config_path="/etc/turnserver.conf"
 
@@ -192,7 +187,7 @@ echo "Coturn server was successfully installed :)
 
 For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
 
-STUN or TURN URI: $domain:$turnserver_tls_port
+STUN or TURN URI: turn:$domain:$turnserver_tls_port
 TURN username:    turnserver
 TURN password:    $turnserver_pwd
 
