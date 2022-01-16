@@ -1,6 +1,6 @@
 ## Configuration
 
-Vous devez installer coTURN à la racine ou un sous-domaine comme `turn.domain.lts`
+Vous devez installer coTURN à la racine ou un sous-domaine comme `turn.domain.tld`
 
 How to configure this app: a plain file with SSH.
 
