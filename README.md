@@ -25,7 +25,7 @@ The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can
 
 ## Configuration
 
-You need to install TURN server in a root or subdomain like `turn.domain.lts`
+You need to install TURN server in a root or subdomain like `turn.domain.tld`
 
 How to configure this app: a plain file with SSH.
 
