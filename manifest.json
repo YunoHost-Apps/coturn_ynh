@@ -11,7 +11,8 @@
     "upstream": {
         "license": "BSD-3-Clause",
         "admindoc": "https://github.com/coturn/coturn/wiki",
-        "code": "https://github.com/coturn/coturn"
+        "code": "https://github.com/coturn/coturn",
+        "cpe": "cpe:2.3:a:coturn_project:coturn"
     },
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -22,10 +23,9 @@
         "yunohost": ">= 4.3.0"
     },
     "multi_instance": false,
-    "services": [
-    ],
+    "services": [],
     "arguments": {
-        "install" : [
+        "install": [
             {
                 "name": "domain",
                 "type": "domain"
