@@ -14,22 +14,22 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-domain=$YNH_APP_ARG_DOMAIN
+#REMOVEME? domain=$YNH_APP_ARG_DOMAIN
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..." --weight=4
+#REMOVEME? ynh_script_progression --message="Storing installation settings..." --weight=4
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
+#REMOVEME? ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=no_sso --value=true
 
 #=================================================
@@ -53,36 +53,36 @@ fi
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Finding an available port..." --weight=3
+#REMOVEME? ynh_script_progression --message="Finding an available port..." --weight=3
 
 # Find an available port
-turnserver_tls_port=$(ynh_find_port --port=5349)
-turnserver_alt_tls_port=$(ynh_find_port --port=$((turnserver_tls_port+1)))
-cli_port=$(ynh_find_port --port=5766)
+#REMOVEME? turnserver_tls_port=$(ynh_find_port --port=5349)
+#REMOVEME? turnserver_alt_tls_port=$(ynh_find_port --port=$((turnserver_tls_port+1)))
+#REMOVEME? cli_port=$(ynh_find_port --port=5766)
 
 # Open the port
 ynh_exec_warn_less yunohost firewall allow Both $turnserver_tls_port
 ynh_exec_warn_less yunohost firewall allow Both $turnserver_alt_tls_port
 
 # Store opened ports
-ynh_app_setting_set --app=$app --key=turnserver_tls_port --value=$turnserver_tls_port
-ynh_app_setting_set --app=$app --key=turnserver_alt_tls_port --value=$turnserver_alt_tls_port
-ynh_app_setting_set --app=$app --key=cli_port --value=$cli_port
+#REMOVEME? ynh_app_setting_set --app=$app --key=turnserver_tls_port --value=$turnserver_tls_port
+#REMOVEME? ynh_app_setting_set --app=$app --key=turnserver_alt_tls_port --value=$turnserver_alt_tls_port
+#REMOVEME? ynh_app_setting_set --app=$app --key=cli_port --value=$cli_port
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=5
+#REMOVEME? ynh_script_progression --message="Installing dependencies..." --weight=5
 
-ynh_install_app_dependencies $pkg_dependencies
+#REMOVEME? ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=3
+#REMOVEME? ynh_script_progression --message="Configuring system user..." --weight=3
 
 # Create a system user
-ynh_system_user_create --username=turnserver
+#REMOVEME? ynh_system_user_create --username=turnserver
 adduser turnserver ssl-cert
 
 #=================================================
