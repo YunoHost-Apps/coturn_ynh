@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Coturn for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Working status](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Working status](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+
 [![Install Coturn with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -18,23 +19,6 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
 **Shipped version:** 4.5.2.3~ynh1
-## Disclaimers / important information
-
-## Configuration
-
-You need to install TURN server in a root or subdomain like `turn.domain.tld`
-
-How to configure this app: a plain file with SSH.
-
-## Testing
-
-For testing we can use Trickle-Ice testing tool. Go to [trickle-ice page](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) and enter following details.
-```
-TURN URI     : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
-TURN username: <YOUR_USERNAME>
-TURN password: <YOUR_PASSWORD>
-```
-
 ## Documentation and resources
 
 * Official admin documentation: <https://github.com/coturn/coturn/wiki>
