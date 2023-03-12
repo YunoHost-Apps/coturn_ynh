@@ -10,20 +10,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
-#=================================================
-#REMOVEME? ynh_script_progression --message="Loading installation settings..." --weight=1
-
-#REMOVEME? app=$YNH_APP_INSTANCE_NAME
-
-#REMOVEME? domain=$(ynh_app_setting_get --app=$app --key=domain)
-#REMOVEME? #REMOVEME? install_dir=$(ynh_app_setting_get --app=$app --key=install_dir)
-#REMOVEME? turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
-#REMOVEME? turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
-#REMOVEME? cli_port=$(ynh_app_setting_get --app=$app --key=cli_port)
-#REMOVEME? turnserver_pwd=$(ynh_app_setting_get --app=$app --key=turnserver_pwd)
-
-#=================================================
 # CHECK VERSION
 #=================================================
 
@@ -54,6 +40,7 @@ ynh_script_progression --message="Configuring a systemd service..." --weight=1
 mkdir -p /var/log/$app
 # Create systemd service for turnserver
 cp ../conf/default.coturn /etc/default/coturn
+
 # Create a dedicated systemd config
 ynh_add_systemd_config
 
@@ -87,10 +74,9 @@ ynh_store_file_checksum --file="$coturn_config_path"
 
 # WARNING : theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
-#data_path="/home/yunohost.app/$app"
-#mkdir -p $data_path
 cp -f ../sources/Coturn_config_rotate.sh $data_dir/
 ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_dir/Coturn_config_rotate.sh
+
 chmod +x $data_dir/Coturn_config_rotate.sh
 
 #=================================================
