@@ -65,16 +65,6 @@ chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 
 #=================================================
-# SPECIFIC RESTORATION
-#=================================================
-# REINSTALL DEPENDENCIES
-#=================================================
-#REMOVEME? ynh_script_progression --message="Reinstalling dependencies..." --weight=1
-
-# Define and install dependencies
-#REMOVEME? ynh_install_app_dependencies $pkg_dependencies
-
-#=================================================
 # RESTORE SYSTEMD
 #=================================================
 ynh_script_progression --message="Restoring the systemd configuration..." --weight=1
