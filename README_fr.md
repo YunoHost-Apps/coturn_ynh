@@ -5,20 +5,20 @@ It shall NOT be edited by hand.
 
 # Coturn pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+
 [![Installer Coturn avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Coturn rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Coturn rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Version incluse :** 4.5.2.3~ynh1
-
+**Version incluse :** 4.5.2.3~ynh2
 ## Avertissements / informations importantes
 
 ## Configuration
@@ -38,8 +38,8 @@ TURN password: <YOUR_PASSWORD>
 
 ## Documentations et ressources
 
-* Documentation officielle de l'admin : <https://github.com/coturn/coturn/wiki>
-* Dépôt de code officiel de l'app : <https://github.com/coturn/coturn>
+* Documentation officielle de l’admin : <https://github.com/coturn/coturn/wiki>
+* Dépôt de code officiel de l’app : <https://github.com/coturn/coturn>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_coturn>
 * Signaler un bug : <https://github.com/YunoHost-Apps/coturn_ynh/issues>
 
@@ -55,4 +55,4 @@ ou
 sudo yunohost app upgrade coturn -u https://github.com/YunoHost-Apps/coturn_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>

@@ -6,7 +6,7 @@
         "en": "VoIP media traffic NAT traversal server and gateway",
         "fr": "Serveur et passerelle NAT du trafic média VoIP"
     },
-    "version": "4.5.2.3~ynh1",
+    "version": "4.5.2.3~ynh2",
     "url": "https://github.com/coturn/coturn",
     "upstream": {
         "license": "BSD-3-Clause",
