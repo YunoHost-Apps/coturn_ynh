@@ -18,24 +18,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Version incluse :** 4.5.2.3~ynh2
-## Avertissements / informations importantes
-
-## Configuration
-
-Vous devez installer coTURN à la racine ou un sous-domaine comme `turn.domain.tld`
-
-How to configure this app: a plain file with SSH.
-
-## Testing
-
-Pour les tests, vous pouvez utiliser l'outil de test Trickle-Ice. Accédez à la page [trickle-ice](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) et entrez les détails suivants.
-```
-TURN URI     : turn:<YOUR_PUBLIC_IP_ADDRESS>:5349
-TURN username: <YOUR_USERNAME>
-TURN password: <YOUR_PASSWORD>
-```
-
+**Version incluse :** 4.5.2.3~ynh3
 ## Documentations et ressources
 
 * Documentation officielle de l’admin : <https://github.com/coturn/coturn/wiki>

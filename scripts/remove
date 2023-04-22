@@ -10,17 +10,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
-#=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=1
-
-app=$YNH_APP_INSTANCE_NAME
-
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-turnserver_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_tls_port)
-turnserver_alt_tls_port=$(ynh_app_setting_get --app=$app --key=turnserver_alt_tls_port)
-
-#=================================================
 # STANDARD REMOVE
 #=================================================
 # REMOVE SERVICE INTEGRATION IN YUNOHOST
@@ -40,14 +29,6 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 
 # Remove the dedicated systemd config
 ynh_remove_systemd_config
-
-#=================================================
-# REMOVE DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Removing dependencies..." --weight=1
-
-# Remove metapackage and its dependencies
-ynh_remove_app_dependencies
 
 #=================================================
 # REMOVE APP MAIN DIR
@@ -85,22 +66,6 @@ ynh_secure_remove --file=/var/log/$app
 #ynh_secure_remove --file=/var/lib/turn
 
 #=================================================
-# CLOSE PORTS
-#=================================================
-
-if yunohost firewall list | grep -q "\- $turnserver_tls_port$"
-then
-    ynh_script_progression --message="Closing port $turnserver_tls_port..." --weight=1
-    ynh_exec_warn_less yunohost firewall disallow Both $turnserver_tls_port 
-fi
-
-if yunohost firewall list | grep -q "\- $turnserver_alt_tls_port$"
-then
-    ynh_script_progression --message="Closing port $turnserver_alt_tls_port..." --weight=1
-    ynh_exec_warn_less yunohost firewall disallow Both $turnserver_alt_tls_port
-fi
-
-#=================================================
 # GENERIC FINALIZATION
 #=================================================
 # REMOVE DEDICATED USER
@@ -109,7 +74,6 @@ ynh_script_progression --message="Removing the dedicated system user..." --weigh
 
 # Delete a system user
 deluser turnserver ssl-cert
-ynh_system_user_delete --username=turnserver
 
 #=================================================
 # END OF SCRIPT
