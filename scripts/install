@@ -10,26 +10,9 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# MANAGE SCRIPT FAILURE
-#=================================================
-
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
-
-#=================================================
-# RETRIEVE ARGUMENTS FROM THE MANIFEST
-#=================================================
-
-domain=$YNH_APP_ARG_DOMAIN
-
-app=$YNH_APP_INSTANCE_NAME
-
-#=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..." --weight=4
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=no_sso --value=true
 
 #=================================================
@@ -49,40 +32,11 @@ then
 fi
 
 #=================================================
-# STANDARD MODIFICATIONS
-#=================================================
-# FIND AND OPEN A PORT
-#=================================================
-ynh_script_progression --message="Finding an available port..." --weight=3
-
-# Find an available port
-turnserver_tls_port=$(ynh_find_port --port=5349)
-turnserver_alt_tls_port=$(ynh_find_port --port=$((turnserver_tls_port+1)))
-cli_port=$(ynh_find_port --port=5766)
-
-# Open the port
-ynh_exec_warn_less yunohost firewall allow Both $turnserver_tls_port
-ynh_exec_warn_less yunohost firewall allow Both $turnserver_alt_tls_port
-
-# Store opened ports
-ynh_app_setting_set --app=$app --key=turnserver_tls_port --value=$turnserver_tls_port
-ynh_app_setting_set --app=$app --key=turnserver_alt_tls_port --value=$turnserver_alt_tls_port
-ynh_app_setting_set --app=$app --key=cli_port --value=$cli_port
-
-#=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=5
-
-ynh_install_app_dependencies $pkg_dependencies
-
-#=================================================
 # CREATE DEDICATED USER
 #=================================================
 ynh_script_progression --message="Configuring system user..." --weight=3
 
 # Create a system user
-ynh_system_user_create --username=turnserver
 adduser turnserver ssl-cert
 
 #=================================================
@@ -130,11 +84,10 @@ ynh_store_file_checksum --file="$coturn_config_path"
 
 # WARNING : theses command are used in INSTALL, UPGRADE
 # For any update do it in all files
-data_path="/home/yunohost.app/$app"
-mkdir -p $data_path
-cp -f ../sources/Coturn_config_rotate.sh $data_path/
-ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_path/Coturn_config_rotate.sh
-chmod +x $data_path/Coturn_config_rotate.sh
+cp -f ../sources/Coturn_config_rotate.sh $data_dir/
+ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_dir/Coturn_config_rotate.sh
+
+chmod +x $data_dir/Coturn_config_rotate.sh
 
 #=================================================
 # SET COTURN CRON
@@ -156,7 +109,7 @@ ynh_use_logrotate --logfile "/var/log/$app"
 #=================================================
 
 # Set permissions to app files
-chown root: -R $data_path
+chown root: -R $data_dir
 chown -R turnserver:root /var/log/$app
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
@@ -166,7 +119,7 @@ setfacl -R -m user:turnserver:rwX  /var/log/$app
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=2
 
-yunohost service add $app --description="Coturn TURN server" --log="/var/log/$app/$app.log" --needs_exposed_ports="$turnserver_tls_port"
+yunohost service add $app --description="Coturn TURN server" --log="/var/log/$app/$app.log" --needs_exposed_ports="$port_turnserver_tls"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -175,25 +128,6 @@ ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action=restart --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# SEND A README FOR THE ADMIN
-#=================================================
-
-# WARNING : theses command are used in INSTALL, RESTORE
-# For any update do it in all files
-
-echo "Coturn server was successfully installed :)
-
-For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
-
-STUN or TURN URI: turn:$domain:$turnserver_tls_port
-TURN username:    turnserver
-TURN password:    $turnserver_pwd
-
-If you're facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/coturn_ynh" > mail_to_send
-
-ynh_send_readme_to_admin --app_message="mail_to_send" --type="install"
 
 #=================================================
 # END OF SCRIPT

@@ -1,0 +1,48 @@
+packaging_format = 2
+
+id = "coturn"
+name = "Coturn"
+description.en = "VoIP media traffic NAT traversal server and gateway"
+description.fr = "Serveur et passerelle NAT du trafic média VoIP"
+
+version = "4.5.2.3~ynh3"
+
+maintainers = ["eric_G"]
+
+[upstream]
+license = "BSD-3-Clause"
+admindoc = "https://github.com/coturn/coturn/wiki"
+code = "https://github.com/coturn/coturn"
+
+[integration]
+yunohost = ">= 11.1.19"
+architectures = "all"
+multi_instance = false
+ldap = "not_relevant"
+sso = "not_relevant"
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+    [install.domain]
+    type = "domain"
+    full_domain = true
+
+[resources]
+    [resources.ports]
+    turnserver_tls.default = 5349
+    turnserver_tls.exposed = "Both"
+    turnserver_alt_tls.default = 5350
+    turnserver_alt_tls.exposed = "Both"
+    cli.default = 5766
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.data_dir]
+
+    [resources.permissions]
+
+    [resources.apt]
+    packages = "sqlite3 libsqlite3-dev coturn acl"
