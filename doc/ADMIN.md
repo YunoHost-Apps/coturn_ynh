@@ -1,9 +1,3 @@
-## Configuration
-
-You need to install TURN server in a root or subdomain like `__DOMAIN__`
-
-How to configure this app: a plain file with SSH.
-
 ## Testing
 
 For testing we can use Trickle-Ice testing tool. Go to [trickle-ice page](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) and enter following details.

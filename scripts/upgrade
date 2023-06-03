@@ -49,9 +49,6 @@ ynh_add_systemd_config
 #=================================================
 ynh_script_progression --message="Configuring Coturn..." --weight=2
 
-# WARNING: theses command are used in INSTALL, UPGRADE
-# For any update do it in all files
-
 coturn_config_path="/etc/turnserver.conf"
 
 ynh_add_config --template="../conf/turnserver.conf" --destination="$coturn_config_path"
@@ -72,8 +69,6 @@ ynh_store_file_checksum --file="$coturn_config_path"
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
 
-# WARNING : theses command are used in INSTALL, UPGRADE
-# For any update do it in all files
 cp -f ../sources/Coturn_config_rotate.sh $data_dir/
 ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_dir/Coturn_config_rotate.sh
 
