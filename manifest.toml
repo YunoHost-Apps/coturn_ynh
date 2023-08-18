@@ -26,7 +26,6 @@ ram.runtime = "50M"
 
     [install.domain]
     type = "domain"
-    full_domain = true
 
 [resources]
     [resources.ports]
