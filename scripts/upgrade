@@ -78,7 +78,7 @@ chmod +x $data_dir/Coturn_config_rotate.sh
 # SET COTURN CRON
 #=================================================
 
-ynh_add_config --template="../conf/cron_coturn" --destination="/etc/cron.d/$app"
+ynh_add_config --template="cron_coturn" --destination="/etc/cron.d/$app"
 
 #=================================================
 # MIGRATION 3 : USE STANDARD ACCESS FOR CERTIFCATE
