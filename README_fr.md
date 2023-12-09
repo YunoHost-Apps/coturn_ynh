@@ -23,7 +23,7 @@ Le serveur TURN est un serveur et une passerelle NAT pour le trafic multimédia 
 
 * Documentation officielle de l’admin : <https://github.com/coturn/coturn/wiki>
 * Dépôt de code officiel de l’app : <https://github.com/coturn/coturn>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_coturn>
+* YunoHost Store: <https://apps.yunohost.org/app/coturn>
 * Signaler un bug : <https://github.com/YunoHost-Apps/coturn_ynh/issues>
 
 ## Informations pour les développeurs

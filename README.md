@@ -23,7 +23,7 @@ The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can
 
 * Official admin documentation: <https://github.com/coturn/coturn/wiki>
 * Upstream app code repository: <https://github.com/coturn/coturn>
-* YunoHost documentation for this app: <https://yunohost.org/app_coturn>
+* YunoHost Store: <https://apps.yunohost.org/app/coturn>
 * Report a bug: <https://github.com/YunoHost-Apps/coturn_ynh/issues>
 
 ## Developer info
