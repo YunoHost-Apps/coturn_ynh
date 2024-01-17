@@ -38,8 +38,9 @@ adduser turnserver ssl-cert
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 mkdir -p /var/log/$app
+
 # Create systemd service for turnserver
-cp ../conf/default.coturn /etc/default/coturn
+ynh_add_config --template="default.coturn" --destination="/etc/default/coturn"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
@@ -48,9 +49,6 @@ ynh_add_systemd_config
 # SET COTURN CONFIG
 #=================================================
 ynh_script_progression --message="Configuring Coturn..." --weight=2
-
-# WARNING: theses command are used in INSTALL, UPGRADE
-# For any update do it in all files
 
 coturn_config_path="/etc/turnserver.conf"
 
@@ -72,8 +70,6 @@ ynh_store_file_checksum --file="$coturn_config_path"
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
 
-# WARNING : theses command are used in INSTALL, UPGRADE
-# For any update do it in all files
 cp -f ../sources/Coturn_config_rotate.sh $data_dir/
 ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_dir/Coturn_config_rotate.sh
 
@@ -83,7 +79,7 @@ chmod +x $data_dir/Coturn_config_rotate.sh
 # SET COTURN CRON
 #=================================================
 
-ynh_add_config --template="../conf/cron_coturn" --destination="/etc/cron.d/$app"
+ynh_add_config --template="cron_coturn" --destination="/etc/cron.d/$app"
 
 #=================================================
 # MIGRATION 3 : USE STANDARD ACCESS FOR CERTIFCATE

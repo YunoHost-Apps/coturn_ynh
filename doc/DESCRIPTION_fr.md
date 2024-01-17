@@ -1,0 +1,1 @@
+Le serveur TURN est un serveur et une passerelle NAT pour le trafic multimédia VoIP. Il peut également être utilisé comme serveur et passerelle TURN de trafic réseau à usage général.

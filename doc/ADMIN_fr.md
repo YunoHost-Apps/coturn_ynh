@@ -1,7 +1,3 @@
-## Configuration
-
-Vous devez installer coTURN à la racine ou un sous-domaine comme `__DOMAIN__`
-
 ## Testing
 
 Pour les tests, vous pouvez utiliser l'outil de test Trickle-Ice. Accédez à la page [trickle-ice](https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice) et entrez les détails suivants.
