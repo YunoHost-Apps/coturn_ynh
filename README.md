@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Shipped version:** 4.5.2.3~ynh3
+**Shipped version:** 4.5.2.3~ynh4
 ## Documentation and resources
 
 * Official admin documentation: <https://github.com/coturn/coturn/wiki>
