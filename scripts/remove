@@ -34,9 +34,6 @@ ynh_remove_logrotate
 # Remove a cron file
 ynh_secure_remove --file=/etc/cron.d/$app
 
-# Remove the log files
-ynh_secure_remove --file=/var/log/$app
-
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
