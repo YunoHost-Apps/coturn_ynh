@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Coturn YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
 
 [![Instalatu Coturn YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
