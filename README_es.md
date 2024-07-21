@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # Coturn para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
 
 [![Instalar Coturn con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
