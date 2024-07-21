@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Coturn YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/coturn.svg)](https://dash.yunohost.org/appci/app/coturn) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
 
 [![Instalatu Coturn YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
@@ -18,7 +18,7 @@ EZ editatu eskuz.
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Paketatutako bertsioa:** 4.5.2.3~ynh4
+**Paketatutako bertsioa:** 4.5.2.3~ynh5
 ## Dokumentazioa eta baliabideak
 
 - Administratzaileen dokumentazio ofiziala: <https://github.com/coturn/coturn/wiki>
