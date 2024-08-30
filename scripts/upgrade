@@ -1,33 +1,19 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# CHECK VERSION
-#=================================================
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# STANDARD UPGRADE STEPS
-#=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
+ynh_script_progression "Stopping $app's systemd service..."
 
-ynh_systemd_action --service_name=$app --action=stop --log_path="/var/log/$app/$app.log"
+ynh_systemctl --service=$app --action=stop
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+ynh_script_progression "Making sure dedicated system user exists..."
 
 # Create a dedicated user (if not existing)
 adduser turnserver ssl-cert
@@ -35,43 +21,43 @@ adduser turnserver ssl-cert
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
+ynh_script_progression "Configuring $app's systemd service..."
 
 mkdir -p /var/log/$app
 
 # Create systemd service for turnserver
-ynh_add_config --template="default.coturn" --destination="/etc/default/coturn"
+ynh_config_add --template="default.coturn" --destination="/etc/default/coturn"
 
 # Create a dedicated systemd config
-ynh_add_systemd_config
+ynh_config_add_systemd
 
 #=================================================
 # SET COTURN CONFIG
 #=================================================
-ynh_script_progression --message="Configuring Coturn..." --weight=2
+ynh_script_progression "Configuring Coturn..."
 
 coturn_config_path="/etc/turnserver.conf"
 
-ynh_add_config --template="../conf/turnserver.conf" --destination="$coturn_config_path"
+ynh_config_add --template="turnserver.conf" --destination="$coturn_config_path"
 
 # Get public IP and set as external IP for coturn
 # note: '|| true' is used to ignore the errors if we can't get the public ipv4 or ipv6
 public_ip4="$(curl -s ip.yunohost.org)" || true
 public_ip6="$(curl -s ipv6.yunohost.org)" || true
 
-if ( [[ -n "$public_ip4" ]] && ynh_validate_ip4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
+if ( [[ -n "$public_ip4" ]] && ynh_validate_ip --family=4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
 then
     echo "external-ip=${public_ip4}/${public_ip6}" >> "$coturn_config_path"
 fi
 
-ynh_store_file_checksum --file="$coturn_config_path"
+ynh_store_file_checksum "$coturn_config_path"
 
 #=================================================
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
 
 cp -f ../sources/Coturn_config_rotate.sh $data_dir/
-ynh_replace_string --match_string="__APP__" --replace_string=$app --target_file=$data_dir/Coturn_config_rotate.sh
+ynh_replace --match="__APP__" --replace=$app --file=$data_dir/Coturn_config_rotate.sh
 
 chmod +x $data_dir/Coturn_config_rotate.sh
 
@@ -79,7 +65,7 @@ chmod +x $data_dir/Coturn_config_rotate.sh
 # SET COTURN CRON
 #=================================================
 
-ynh_add_config --template="cron_coturn" --destination="/etc/cron.d/$app"
+ynh_config_add --template="cron_coturn" --destination="/etc/cron.d/$app"
 
 #=================================================
 # MIGRATION 3 : USE STANDARD ACCESS FOR CERTIFCATE
@@ -88,7 +74,7 @@ ynh_add_config --template="cron_coturn" --destination="/etc/cron.d/$app"
 # Fix issue about certificates access
 # if [ ! $(grep "ssl-cert:x:[0-9]*:.*$app" /etc/group) ]
 # then
-#     ynh_script_progression --message="Use standard access for certificate..." --weight=1
+#     ynh_script_progression "Use standard access for certificate..."
 
 #     adduser turnserver ssl-cert
 # fi
@@ -96,39 +82,37 @@ ynh_add_config --template="cron_coturn" --destination="/etc/cron.d/$app"
 #=================================================
 # SETUP LOGROTATE
 #=================================================
-ynh_script_progression --message="Configuring log rotation..." --weight=5
+ynh_script_progression "Configuring log rotation..."
 
-ynh_use_logrotate --logfile "/var/log/$app"
+ynh_config_add_logrotate  "/var/log/$app"
 
-#=================================================
-# GENERIC FINALIZATION
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
 # Set permissions to app files
 chown root: -R $data_dir
-chown -R turnserver:root /var/log/$app
+#REMOVEME? Assuming ynh_config_add_logrotate is called, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R turnserver:root /var/log/$app
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=2
+ynh_script_progression "Integrating service in YunoHost..."
 
 yunohost service add $app --description="Coturn TURN server" --log="/var/log/$app/$app.log" --needs_exposed_ports="$port_turnserver_tls"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
+ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action=restart --log_path="/var/log/$app/$app.log"
+ynh_systemctl --service=$app --action=restart
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of Coturn completed" --last
+ynh_script_progression "Upgrade of Coturn completed"
