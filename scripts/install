@@ -46,7 +46,7 @@ ynh_config_add_systemd
 #=================================================
 # SET COTURN CONFIG
 #=================================================
-ynh_script_progression "Configuring Coturn..."
+ynh_script_progression "Configuring $app..."
 
 # Find password for turnserver
 turnserver_pwd=$(ynh_string_random --length=30)
