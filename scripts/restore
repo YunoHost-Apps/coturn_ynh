@@ -53,7 +53,7 @@ fi
 # Restore permissions on app files
 # Set permissions to app files
 chown root: -R /home/yunohost.app/$app
-#REMOVEME? Assuming ynh_config_add_logrotate is called, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R turnserver:root /var/log/$app
+chown -R turnserver:root /var/log/$app
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
 

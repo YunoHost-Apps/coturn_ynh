@@ -75,7 +75,6 @@ ynh_config_add --template="cron_coturn" --destination="/etc/cron.d/$app"
 # if [ ! $(grep "ssl-cert:x:[0-9]*:.*$app" /etc/group) ]
 # then
 #     ynh_script_progression "Use standard access for certificate..."
-
 #     adduser turnserver ssl-cert
 # fi
 
