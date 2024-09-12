@@ -5,7 +5,7 @@ name = "Coturn"
 description.en = "VoIP media traffic NAT traversal server and gateway"
 description.fr = "Serveur et passerelle NAT du trafic média VoIP"
 
-version = "4.5.2.3~ynh5"
+version = "4.5.2.3~ynh6"
 
 maintainers = []
 
@@ -15,7 +15,8 @@ admindoc = "https://github.com/coturn/coturn/wiki"
 code = "https://github.com/coturn/coturn"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.30"
+helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
 

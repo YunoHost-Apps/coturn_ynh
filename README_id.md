@@ -18,11 +18,11 @@ Ini TIDAK boleh diedit dengan tangan.
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Versi terkirim:** 4.5.2.3~ynh5
+**Versi terkirim:** 4.5.2.3~ynh6
 ## Dokumentasi dan sumber daya
 
 - Dokumentasi admin resmi: <https://github.com/coturn/coturn/wiki>
-- Repositori kode aplikasi hulu: <https://github.com/coturn/coturn>
+- Depot kode aplikasi hulu: <https://github.com/coturn/coturn>
 - Gudang YunoHost: <https://apps.yunohost.org/app/coturn>
 - Laporkan bug: <https://github.com/YunoHost-Apps/coturn_ynh/issues>
 
