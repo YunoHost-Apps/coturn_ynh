@@ -9,6 +9,7 @@ source /usr/share/yunohost/helpers
 ynh_script_progression "Restoring Coturn configuration..."
 
 ynh_restore "/etc/turnserver.conf"
+ynh_restore "/etc/nginx/modules-enabled/$app.conf"
 
 #=================================================
 # RESTORE THE COTURN DATAPATH

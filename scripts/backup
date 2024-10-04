@@ -10,6 +10,7 @@ ynh_print_info "Declaring files to be backed up..."
 #=================================================
 
 ynh_backup "/etc/turnserver.conf"
+ynh_backup "/etc/nginx/modules-enabled/$app.conf"
 
 #=================================================
 # BACKUP THE COTURN DATAPATH

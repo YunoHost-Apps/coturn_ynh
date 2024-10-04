@@ -15,6 +15,7 @@ fi
 ynh_config_remove_systemd
 
 ynh_safe_rm "/etc/turnserver.conf"
+ynh_safe_rm "/etc/nginx/modules-enabled/$app.conf"
 
 ynh_config_remove_logrotate
 

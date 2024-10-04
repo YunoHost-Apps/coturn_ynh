@@ -52,6 +52,9 @@ fi
 
 ynh_store_file_checksum "$coturn_config_path"
 
+# UDP 443
+ynh_config_add --template="nginx_coturn.conf" --destination="/etc/nginx/modules-enabled/$app.conf"
+
 #=================================================
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
