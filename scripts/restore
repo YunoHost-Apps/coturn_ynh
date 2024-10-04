@@ -17,8 +17,6 @@ ynh_script_progression "Restoring the data directory..."
 
 ynh_restore "$data_dir"
 
-chown root: -R $data_dir
-
 #=================================================
 # RESTORE LOG
 #=================================================
@@ -52,7 +50,7 @@ fi
 
 # Restore permissions on app files
 # Set permissions to app files
-chown root: -R /home/yunohost.app/$app
+chown root: -R $data_dir
 chown -R turnserver:root /var/log/$app
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
