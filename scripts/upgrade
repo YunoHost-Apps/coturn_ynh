@@ -80,7 +80,7 @@ ynh_config_add --template="cron_coturn" --destination="/etc/cron.d/$app"
 #=================================================
 ynh_script_progression "Configuring log rotation..."
 
-ynh_config_add_logrotate  "/var/log/$app"
+ynh_config_add_logrotate
 
 #=================================================
 # SECURE FILES AND DIRECTORIES
