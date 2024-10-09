@@ -15,7 +15,6 @@ ynh_systemctl --service=$app --action=stop
 #=================================================
 ynh_script_progression "Making sure dedicated system user exists..."
 
-# Create a dedicated user (if not existing)
 adduser turnserver ssl-cert
 
 #=================================================
@@ -25,10 +24,8 @@ ynh_script_progression "Configuring $app's systemd service..."
 
 mkdir -p /var/log/$app
 
-# Create systemd service for turnserver
 ynh_config_add --template="default.coturn" --destination="/etc/default/coturn"
 
-# Create a dedicated systemd config
 ynh_config_add_systemd
 
 #=================================================
@@ -83,13 +80,12 @@ ynh_config_add --template="cron_coturn" --destination="/etc/cron.d/$app"
 #=================================================
 ynh_script_progression "Configuring log rotation..."
 
-ynh_config_add_logrotate  "/var/log/$app"
+ynh_config_add_logrotate
 
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-# Set permissions to app files
 chown root: -R $data_dir
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
@@ -106,7 +102,6 @@ yunohost service add $app --description="Coturn TURN server" --log="/var/log/$ap
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-# Start a systemd service
 ynh_systemctl --service=$app --action=restart
 
 #=================================================
