@@ -7,7 +7,7 @@ coturn_config_path="/etc/turnserver.conf"
 external_IP_line="external-ip=__IPV4__/__IPV6__"
 
 public_ip4="$(curl -s ip.yunohost.org)" || true
-public_ip6="$(curl -s ipv6.yunohost.org)" || true
+public_ip6="$(curl -s ip6.yunohost.org)" || true
 
 if [ -n "$public_ip4" ] && ynh_validate_ip --family=4 --ip_address="$public_ip4"
 then
