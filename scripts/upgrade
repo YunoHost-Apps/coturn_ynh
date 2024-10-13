@@ -15,7 +15,6 @@ ynh_systemctl --service=$app --action=stop
 #=================================================
 ynh_script_progression "Making sure dedicated system user exists..."
 
-# Create a dedicated user (if not existing)
 adduser turnserver ssl-cert
 
 #=================================================
@@ -25,32 +24,28 @@ ynh_script_progression "Configuring $app's systemd service..."
 
 mkdir -p /var/log/$app
 
-# Create systemd service for turnserver
 ynh_config_add --template="default.coturn" --destination="/etc/default/coturn"
 
-# Create a dedicated systemd config
 ynh_config_add_systemd
 
 #=================================================
 # SET COTURN CONFIG
 #=================================================
-ynh_script_progression "Configuring Coturn..."
+ynh_script_progression "Configuring $app..."
 
-coturn_config_path="/etc/turnserver.conf"
-
-ynh_config_add --template="turnserver.conf" --destination="$coturn_config_path"
+ynh_config_add --template="turnserver.conf" --destination="/etc/turnserver.conf"
 
 # Get public IP and set as external IP for coturn
 # note: '|| true' is used to ignore the errors if we can't get the public ipv4 or ipv6
 public_ip4="$(curl -s ip.yunohost.org)" || true
-public_ip6="$(curl -s ipv6.yunohost.org)" || true
+public_ip6="$(curl -s ip6.yunohost.org)" || true
 
-if ( [[ -n "$public_ip4" ]] && ynh_validate_ip --family=4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
+if ( [[ -n "$public_ip4" ]] && ynh_validate_ip --family=4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip --family=6 --ip_address="$public_ip6" )
 then
-    echo "external-ip=${public_ip4}/${public_ip6}" >> "$coturn_config_path"
+    echo "external-ip=${public_ip4}/${public_ip6}" >> "/etc/turnserver.conf"
 fi
 
-ynh_store_file_checksum "$coturn_config_path"
+ynh_store_file_checksum "/etc/turnserver.conf"
 
 #=================================================
 # ADD SCRIPT FOR COTURN CRON
@@ -83,13 +78,12 @@ ynh_config_add --template="cron_coturn" --destination="/etc/cron.d/$app"
 #=================================================
 ynh_script_progression "Configuring log rotation..."
 
-ynh_config_add_logrotate  "/var/log/$app"
+ynh_config_add_logrotate
 
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-# Set permissions to app files
 chown root: -R $data_dir
 chown turnserver:root /etc/turnserver.conf
 setfacl -R -m user:turnserver:rwX  /var/log/$app
@@ -106,7 +100,6 @@ yunohost service add $app --description="Coturn TURN server" --log="/var/log/$ap
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-# Start a systemd service
 ynh_systemctl --service=$app --action=restart
 
 #=================================================
