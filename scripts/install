@@ -27,7 +27,6 @@ fi
 #=================================================
 ynh_script_progression "Configuring system user..."
 
-# Create a system user
 adduser turnserver ssl-cert
 
 #=================================================
@@ -50,9 +49,7 @@ ynh_script_progression "Configuring $app..."
 turnserver_pwd=$(ynh_string_random --length=30)
 ynh_app_setting_set --key=turnserver_pwd --value=$turnserver_pwd
 
-coturn_config_path="/etc/turnserver.conf"
-
-ynh_config_add --template="turnserver.conf" --destination="$coturn_config_path"
+ynh_config_add --template="turnserver.conf" --destination="/etc/turnserver.conf"
 
 # Get public IP and set as external IP for coturn
 # note: '|| true' is used to ignore the errors if we can't get the public ipv4 or ipv6
@@ -61,16 +58,14 @@ public_ip6="$(curl -s ip6.yunohost.org)" || true
 
 if ( [[ -n "$public_ip4" ]] && ynh_validate_ip --family=4 --ip_address="$public_ip4" || [[ -n "$public_ip6" ]] && ynh_validate_ip6 --ip_address="$public_ip6" )
 then
-    echo "external-ip=${public_ip4}/${public_ip6}" >> "$coturn_config_path"
+    echo "external-ip=${public_ip4}/${public_ip6}" >> "/etc/turnserver.conf"
 fi
 
-ynh_store_file_checksum "$coturn_config_path"
+ynh_store_file_checksum "/etc/turnserver.conf"
 
 #=================================================
 # ADD SCRIPT FOR COTURN CRON
 #=================================================
-
-ynh_config_add --template="Coturn_config_rotate.sh" --destination="$data_dir/Coturn_config_rotate.sh"
 
 # For any update do it in all files
 cp -f ../sources/Coturn_config_rotate.sh $data_dir/
