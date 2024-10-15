@@ -18,7 +18,7 @@
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**分发版本：** 4.5.2.3~ynh7
+**分发版本：** 4.5.2.3~ynh8
 ## 文档与资源
 
 - 官方管理文档： <https://github.com/coturn/coturn/wiki>
