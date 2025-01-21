@@ -5,7 +5,9 @@ Hij mag NIET handmatig aangepast worden.
 
 # Coturn voor Yunohost
 
-[![Integratieniveau](https://dash.yunohost.org/integration/coturn.svg)](https://ci-apps.yunohost.org/ci/apps/coturn/) ![Mate van functioneren](https://ci-apps.yunohost.org/ci/badges/coturn.status.svg) ![Onderhoudsstatus](https://ci-apps.yunohost.org/ci/badges/coturn.maintain.svg)
+[![Integratieniveau](https://apps.yunohost.org/badge/integration/coturn)](https://ci-apps.yunohost.org/ci/apps/coturn/)
+![Mate van functioneren](https://apps.yunohost.org/badge/state/coturn)
+![Onderhoudsstatus](https://apps.yunohost.org/badge/maintained/coturn)
 
 [![Coturn met Yunohost installeren](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=coturn)
 
@@ -18,7 +20,7 @@ Hij mag NIET handmatig aangepast worden.
 
 The TURN Server is a VoIP media traffic NAT traversal server and gateway. It can be used as a general-purpose network traffic TURN server and gateway, too.
 
-**Geleverde versie:** 4.5.2.3~ynh8
+**Geleverde versie:** 4.6.1.1~ynh1
 ## Documentatie en bronnen
 
 - Officiele beheerdersdocumentatie: <https://github.com/coturn/coturn/wiki>
