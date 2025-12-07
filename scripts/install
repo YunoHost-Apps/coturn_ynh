@@ -35,6 +35,7 @@ adduser turnserver ssl-cert
 ynh_script_progression "Configuring $app's systemd service..."
 
 mkdir -p /var/log/$app
+chmod g-w /var/log/$app
 
 ynh_config_add --template="default.coturn" --destination="/etc/default/coturn"
 
