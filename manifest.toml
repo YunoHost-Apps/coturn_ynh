@@ -5,7 +5,7 @@ name = "Coturn"
 description.en = "VoIP media traffic NAT traversal server and gateway"
 description.fr = "Serveur et passerelle NAT du trafic média VoIP"
 
-version = "4.6.1.1~ynh1"
+version = "4.6.1.1~ynh2"
 
 maintainers = []
 
