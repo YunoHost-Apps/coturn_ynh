@@ -15,7 +15,7 @@ admindoc = "https://github.com/coturn/coturn/wiki"
 code = "https://github.com/coturn/coturn"
 
 [integration]
-yunohost = ">= 12.1.12"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
