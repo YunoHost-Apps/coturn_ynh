@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Improve coturn reachability on network with firewall allowing only 80 and 443
+# but without filtering UDP
+iptables -t nat -A PREROUTING -p UDP --dport 443 -j REDIRECT --to-ports 5349
