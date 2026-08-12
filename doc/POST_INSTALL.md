@@ -1,4 +1,4 @@
-For testing we can use Trickle-Ice testing tool. Go to trickle-ice page https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/ and enter following details.
+## Identifiants à utiliser
 
 ```
 STUN URI: stun:__DOMAIN__:443
